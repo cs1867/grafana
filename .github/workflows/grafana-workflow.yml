@@ -5,9 +5,9 @@ name: grafana-workflow
 on:
   workflow_dispatch:
     inputs:  
-      OS:  
+      OS: 
         description: 'OS to build'
-        required: true 
+        required: true
       MINORPACKAGEID:
         description: 'Minor Package run id'
         required: true
@@ -24,11 +24,21 @@ on:
         description: 'Perl Shared build run id'
         required: true
       HOSTMETRICSID:
-        description: 'Host Metrics build run id'
+        description: 'Host metrics build run id'
         required: true 
+      PSCONFIGID:
+        description: 'Psconfig build run id'
+        required: true  
+      ELMONDID:
+        description: 'Elmond build run id'
+        required: true
+      LOGSTASHID:
+        description: 'Logstash build run id'
+        required: true
+      ARCHIVEID:
+        description: 'archive build run id'
+        required: true
 
-        
-  
   workflow_run:
     workflows: "Create Artifacts and pass runid"
     branches: 'github-workflow'
@@ -76,8 +86,8 @@ jobs:
             script: |
               await github.rest.actions.createWorkflowDispatch({
               owner: 'cs1867',
-              repo: 'psconfig',
-              workflow_id: 'psconfig-workflow.yml',
+              repo: '',
+              workflow_id: '-workflow.yml',
               ref: 'github-workflow',
                inputs: {
                 OS: '${{ github.event.inputs.OS }}',
@@ -85,9 +95,12 @@ jobs:
                 I2UTILID: '${{ github.event.inputs.I2UTILID }}',
                 OWAMPID: '${{ github.event.inputs.OWAMPID }}',
                 PSCHEDULERID: '${{ github.event.inputs.PSCHEDULERID }}',
-                PERLSHAREID: '${{ github.event.inputs.PERLSHAREDID }}',
+                PERLSHAREDID: '${{ github.event.inputs.PERLSHAREDID }}',
+                HOSTMETRICSID: '${{ github.event.inputs.HOSTMETRICSID }}',
                 PSCONFIGID: '${{ github.event.inputs.PSCONFIGID }}',
-                HOSTMETRICS: '${{ github.event.inputs.ELMONDID }}',
+                ELMONDID: '${{ github.event.inputs.ELMONDID }}',
+                LOGSTASHID: '${{ github.event.inputs.LOGSTASHID }}',
+                ARCHIVEID: '${{ github.event.inputs.ARCHIVEID }}',
                 GRAFANAID: '${{ github.run_id }}'
               }
               })
