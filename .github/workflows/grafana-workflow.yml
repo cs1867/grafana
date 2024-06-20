@@ -1,7 +1,8 @@
  
 name: grafana-workflow
 on:
-  
+  push:
+    branches: [ 'github-workflow' ]  
   workflow_dispatch: 
     inputs:  
       OS: 
