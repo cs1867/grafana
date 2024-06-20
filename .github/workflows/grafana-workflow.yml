@@ -117,11 +117,7 @@ jobs:
             
         - name: Display NEXTREPO value
           run: echo "The value of NEXTREPO is $NEXTREPO"  
-
-        - name: Use modified BUILD_VARS_JSON with run id
-          run: |
-            echo "Using the modified BUILD_VARS_JSON environment variable:"
-            echo "$BUILD_VARS_JSON" | jq .
+            
         - name: Pass workflow  
           uses: actions/github-script@v6
           with:
